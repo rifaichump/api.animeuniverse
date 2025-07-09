@@ -24,7 +24,7 @@
       <div id="menuDropdown" class="hidden absolute right-0 mt-2 bg-[#2a2a2a] rounded-lg shadow-lg w-40 z-10">
         <button class="w-full text-left px-4 py-2 hover:bg-gray-700">🏠 Home</button>
         <button class="w-full text-left px-4 py-2 hover:bg-gray-700">ℹ️ Tentang</button>
-        <button class="w-full text-left px-4 py-2 hover:bg-gray-700">📞 Kontak</button>
+        <button class="w-full text-left px-4 py-2 hover:bg-gray-700" onclick="location.href='./upload.html'">📞 Kontak</button>
       </div>
     </div>
   </nav>
@@ -39,67 +39,34 @@
   </section>
 
   <!-- Tombol Interaktif -->
-  <section class="flex gap-3 mb-8 text-sm">
+  <section class="flex gap-8 mt-4 mb-8 text-sm">
     <button class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition">🔍 Profil</button>
     <button class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition">💬 Pesan</button>
     <button class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition">➕ Ikuti</button>
   </section>
 
-  <section class="w-full flex justify-center px-4 mb-20">
-  <div class="bg-gray-800 p-4 rounded-2xl shadow-xl max-w-md w-full">
-
-    <div class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4">
-      
-      <!-- Gambar 1 -->
-      <div class="w-[85vw] sm:w-[300px] aspect-video rounded-xl overflow-hidden flex-shrink-0 snap-center border border-gray-700 shadow-md ring-1 ring-gray-800 hover:ring-purple-500 transition-all duration-300">
-        <img src="./images/gambar1.jpeg" class="w-full h-full object-cover" />
+  <!-- Gambar Slider (isi dari JS) -->
+  <section class="w-full flex flex-col items-center px-4 mb-20">
+    <div class="bg-gray-800 p-4 rounded-2xl shadow-xl max-w-md w-full">
+      <h2 class="text-xl font-semibold text-gray-200 mb-4 text-center">Galeri Komunitas</h2>
+      <div id="sliderContainer" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4">
+        <!-- Isi gambar dari JS -->
       </div>
-
-      <!-- Gambar 2 -->
-      <div class="w-[85vw] sm:w-[300px] aspect-video rounded-xl overflow-hidden flex-shrink-0 snap-center border border-gray-700 shadow-md ring-1 ring-gray-800 hover:ring-purple-500 transition-all duration-300">
-        <img src="./images/gambar2.jpeg" class="w-full h-full object-cover" />
-      </div>
-
-      <!-- Gambar 3 -->
-      <div class="w-[85vw] sm:w-[300px] aspect-video rounded-xl overflow-hidden flex-shrink-0 snap-center border border-gray-700 shadow-md ring-1 ring-gray-800 hover:ring-purple-500 transition-all duration-300">
-        <img src="./images/gambar3.jpeg" class="w-full h-full object-cover" />
-      </div>
-
-      <!-- Gambar 4 -->
-      <div class="w-[85vw] sm:w-[300px] aspect-video rounded-xl overflow-hidden flex-shrink-0 snap-center border border-gray-700 shadow-md ring-1 ring-gray-800 hover:ring-purple-500 transition-all duration-300">
-        <img src="./images/gambar4.jpeg" class="w-full h-full object-cover" />
-      </div>
-
-      <!-- Gambar 5 -->
-      <div class="w-[85vw] sm:w-[300px] aspect-video rounded-xl overflow-hidden flex-shrink-0 snap-center border border-gray-700 shadow-md ring-1 ring-gray-800 hover:ring-purple-500 transition-all duration-300">
-        <img src="./images/gambar5.jpeg" class="w-full h-full object-cover" />
-      </div>
-
     </div>
-    
-  </div>
-</section>
+  </section>
+
+  <section class="w-full flex flex-col items-center px-4 mb-20">
+    <div class="bg-gray-800 p-4 rounded-2xl shadow-xl max-w-md w-full">
+      <h2 class="text-xl font-semibold text-gray-200 mb-4 text-center">Galeri Komunitas</h2>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="text-gray-500 text-xs py-4">
     &copy; 2025 DarkConnect. Built by Rifai.
   </footer>
 
-  <!-- JS Menu -->
-  <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const menuDropdown = document.getElementById('menuDropdown');
-
-    menuBtn.addEventListener('click', () => {
-      menuDropdown.classList.toggle('hidden');
-    });
-
-    window.addEventListener('click', function (e) {
-      if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
-        menuDropdown.classList.add('hidden');
-      }
-    });
-  </script>
-
+  <!-- JS -->
+  <script src="script.js" defer></script>
 </body>
 </html>

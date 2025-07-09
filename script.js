@@ -46,4 +46,41 @@ document.addEventListener("DOMContentLoaded", () => {
     sliderContainer.appendChild(wrapper);
   });
 });
-s
+
+const statusBox = document.getElementById("mcStatus");
+
+async function fetchMCStatsStatus() {
+  try {
+    const response = await fetch(`https://api.mcstatus.io/v2/status/bedrock/AnimeUnicraft.aternos.me:12698`);
+    const data = await response.json();
+
+    const online = data?.online;
+    const playersOnline = data?.players?.online ?? 0;
+    const playersMax = data?.players?.max ?? "??";
+    const version = data?.version?.name ?? "Tidak diketahui";
+    const description = cleanMotd(data?.motd?.clean ?? "Tidak ada deskripsi.");
+
+    if (!online) {
+      statusBox.innerHTML = `
+        <p><span class="font-semibold text-red-400">Status:</span> 🔴 Offline</p>
+        <p>Server tidak aktif saat ini.</p>
+      `;
+      return;
+    }
+
+    statusBox.innerHTML = `
+      <p><span class="font-semibold text-green-400">Status:</span> 🟢 Online</p>
+      <p><span class="font-semibold text-blue-400">Pemain:</span> ${playersOnline} / ${playersMax}</p>
+      <p><span class="font-semibold text-yellow-400">Versi:</span> ${version}</p>
+      <p><span class="font-semibold text-purple-400">Deskripsi:</span> ${description}</p>
+    `;
+  } catch (err) {
+    statusBox.innerHTML = `<p class="text-red-400">Gagal mengambil data dari mcstats.io</p>`;
+    console.error(err);
+  }
+};
+setInterval(fetchMCStatsStatus, 1000);
+
+function cleanMotd(input) {
+  return input.replace(/\n\S*/,'');
+}

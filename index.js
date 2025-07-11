@@ -9,6 +9,7 @@ app.use(express.json());
 const TARGET_API = "http://188.165.224.198:5419/api/v2/send-otp";
 
 app.post("/send-otp", async (req, res) => {
+  console.log(req.body);
   const { jid, text } = req.body;
 
   try {

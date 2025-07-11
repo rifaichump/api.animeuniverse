@@ -14,7 +14,6 @@ app.post("/send-otp", async (req, res) => {
   try {
     const response = await fetch(TARGET_API, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ jid, text })
     });
 

@@ -19,6 +19,7 @@ app.post("/send-otp", async (req, res) => {
     });
 
     const data = await response.json();
+    console.log(data)
     res.status(response.status).json(data);
   } catch (err) {
     console.error("Gagal kirim OTP:", err.message);

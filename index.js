@@ -53,26 +53,13 @@ app.post("/info-user", async (req, res) => {
     _req = req.body;
   }
   console.log(_req);
-
-  try {
-    const response = await fetch("http://188.165.224.198:5419/api/v2/info-user", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(_req),
-    });
-
-    const data = await response.json();
-    if (data.status) {
-      res.status(response.status).json(data);
-    } else {
-      res.status(500).json({ status: false });
-    }
-  } catch (err) {
-    console.error("Gagal kirim OTP:", err.message);
-    res
-      .status(500)
-      .json({ status: false, detail: err.message });
-  }
+  const response = await fetch("http://188.165.224.198:5419/api/v2/info-user", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(_req),
+  });
+  const data = await response.json();
+  res.status(response.status).json(data);
 });
 
 const PORT = process.env.PORT || 37817;

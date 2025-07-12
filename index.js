@@ -55,7 +55,7 @@ app.post("/info-user", async (req, res) => {
   console.log(_req);
 
   try {
-    const response = await fetch(TARGET_API, {
+    const response = await fetch("http://188.165.224.198:5419/api/v2/info-user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(_req),

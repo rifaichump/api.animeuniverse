@@ -45,6 +45,36 @@ app.post("/send-otp", async (req, res) => {
   }
 });
 
+app.post("/info-user", async (req, res) => {
+  let _req;
+  if (req.body.data) {
+    _req = req.body.data;
+  } else {
+    _req = req.body;
+  }
+  console.log(_req);
+
+  try {
+    const response = await fetch(TARGET_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(_req),
+    });
+
+    const data = await response.json();
+    if (data.status) {
+      res.status(response.status).json(data);
+    } else {
+      res.status(500).json({ status: false });
+    }
+  } catch (err) {
+    console.error("Gagal kirim OTP:", err.message);
+    res
+      .status(500)
+      .json({ status: false, detail: err.message });
+  }
+});
+
 const PORT = process.env.PORT || 37817;
 
 app.listen(PORT, () => {

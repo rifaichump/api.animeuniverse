@@ -64,6 +64,23 @@ app.post("/send-message", async (req, res) => {
   res.status(response.status).json(data);
 });
 
+app.post("/update-user", async (req, res) => {
+  let _req;
+  if (req.body.data) {
+    _req = req.body.data;
+  } else {
+    _req = req.body;
+  }
+  console.log(_req);
+  const response = await fetch(API + "send-message", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(_req),
+  });
+  const data = await response.json();
+  res.status(response.status).json(data);
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

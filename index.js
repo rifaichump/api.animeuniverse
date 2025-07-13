@@ -72,7 +72,7 @@ app.post("/update-user", async (req, res) => {
     _req = req.body;
   }
   console.log(_req);
-  const response = await fetch(API + "send-message", {
+  const response = await fetch(API + "update-user", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(_req),

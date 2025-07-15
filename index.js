@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const API = "http://188.165.224.198:5419/api/v2/";
+const API = "http://93.177.64.145:5419/api/v2/";
 
 app.get("/", (req, res) => {
   console.log("Berhasil di pulihkan.");

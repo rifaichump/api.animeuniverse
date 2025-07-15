@@ -30,6 +30,23 @@ app.post("/send-otp", async (req, res) => {
   return res.status(response.status).json(data);
 });
 
+app.post("/info-group", async (req, res) => {
+  let _req;
+  if (req.body.data) {
+    _req = req.body.data;
+  } else {
+    _req = req.body;
+  }
+  console.log(_req);
+  const response = await fetch(API + "info-group", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(_req),
+  });
+  const data = await response.json();
+  res.status(response.status).json(data);
+});
+
 app.post("/info-user", async (req, res) => {
   let _req;
   if (req.body.data) {

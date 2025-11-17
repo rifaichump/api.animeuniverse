@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 app.post("/:action", async (req, res) => {
   const { action } = req.params;
 
-  const body = req.body.data ? req.body.data : req.body;
+  const body = JSON.stringify(req.body.data ? req.body.data : req.body);
   console.log(body);
   const response = await fetch(API + "/" + action, {
     method: "POST",

@@ -1,138 +1,32 @@
 const express = require("express");
 const cors = require("cors");
 const fetch = require("node-fetch");
-
+const PORT = process.env.PORT || 3000;
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-const API = "http://93.177.64.145:5419/api/v2/";
+const API = "http://160.191.77.60:5976";
 
 app.get("/", (req, res) => {
-  console.log("Berhasil di pulihkan.");
   res.send("Server Running");
 });
 
-app.post("/send-otp", async (req, res) => {
-  let _req;
-  if (req.body.data) {
-    _req = req.body.data;
-  } else {
-    _req = req.body;
-  }
-  console.log(_req);
-  const response = await fetch(API + "send-otp", {
+app.post("/:action", async (req, res) => {
+  const { action } = req.params;
+
+  const body = req.body.data ? req.body.data : req.body;
+
+  const response = await fetch(API + "/" + action, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(_req),
+    body
   });
+
   const data = await response.json();
   return res.status(response.status).json(data);
 });
-
-app.post("/info-group", async (req, res) => {
-  let _req;
-  if (req.body.data) {
-    _req = req.body.data;
-  } else {
-    _req = req.body;
-  }
-  console.log(_req);
-  const response = await fetch(API + "info-group", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(_req),
-  });
-  const data = await response.json();
-  res.status(response.status).json(data);
-});
-
-app.post("/info-user", async (req, res) => {
-  let _req;
-  if (req.body.data) {
-    _req = req.body.data;
-  } else {
-    _req = req.body;
-  }
-  console.log(_req);
-  const response = await fetch(API + "info-user", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(_req),
-  });
-  const data = await response.json();
-  res.status(response.status).json(data);
-});
-
-app.post("/send-message", async (req, res) => {
-  let _req;
-  if (req.body.data) {
-    _req = req.body.data;
-  } else {
-    _req = req.body;
-  }
-  console.log(_req);
-  const response = await fetch(API + "send-message", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(_req),
-  });
-  const data = await response.json();
-  res.status(response.status).json(data);
-});
-
-app.post("/update-user", async (req, res) => {
-  let _req;
-  if (req.body.data) {
-    _req = req.body.data;
-  } else {
-    _req = req.body;
-  }
-  console.log(_req);
-  const response = await fetch(API + "update-user", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(_req),
-  });
-  const data = await response.json();
-  res.status(response.status).json(data);
-});
-
-app.post("/downloader", async (req, res) => {
-  let _req;
-  if (req.body.data) {
-    _req = req.body.data;
-  } else {
-    _req = req.body;
-  }
-  console.log(_req);
-  const response = await fetch(API + "downloader", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(_req),
-  });
-  const data = await response.json();
-  res.status(response.status).json(data);
-});
-
-app.post("/login", async (req, res) => {
-  let _req;
-  if (req.body.data) {
-    _req = req.body.data;
-  } else {
-    _req = req.body;
-  }
-  console.log(_req);
-  const response = await fetch(API + "login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(_req),
-  });
-  const data = await response.json();
-  res.status(response.status).json(data);
-});
-
-const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log("Proxy OTP server running on port", PORT);

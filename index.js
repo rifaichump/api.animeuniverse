@@ -24,8 +24,12 @@ app.post("/:action", async (req, res) => {
     body
   });
 
-  const data = await response.json();
-  return res.status(response.status).json(data);
+  if(response.ok) {
+    const data = await response.json();
+    return res.status(response.status).json(data);
+  } else {
+    return res.status(response.status).json({ error: response.statusText });
+  }
 });
 
 app.listen(PORT, () => {

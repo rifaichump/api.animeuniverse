@@ -17,18 +17,24 @@ app.post("/:action", async (req, res) => {
   const { action } = req.params;
 
   const body = JSON.stringify(req.body.data ? req.body.data : req.body);
-  console.log(body);
-  const response = await fetch(API + "/" + action, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body
-  });
+  console.log("Mengirim: " + body);
+  try {
+    const response = await fetch(API + "/" + action, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body
+    });
 
-  if(response.ok) {
-    const data = await response.json();
-    return res.status(response.status).json(data);
-  } else {
-    return res.status(response.status).json({ error: response.statusText });
+    if(response.ok) {
+      const data = await response.json();
+      console.log("Diterima: " + data);
+      return res.status(response.status).json(data);
+    } else {
+      return res.status(response.status).json({ error: response.statusText });
+    }
+  } catch (e) {
+    console.log("Error di server Utama");
+    return res.status(502).json({ error: e.message });
   }
 });
 
